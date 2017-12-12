@@ -1,9 +1,11 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import edu.iis.mto.bsearch.BinarySearch;
 import edu.iis.mto.bsearch.SearchResult;
-import org.junit.Before;
-import org.junit.Test;
 
 public class SearchTest {
 
@@ -13,15 +15,23 @@ public class SearchTest {
     private int[] seq;
 
     @Before
-    public void setup(){
+    public void setup() {
         binarySearch = new BinarySearch();
     }
 
     @Test
-    public void searchShouldReturnIsInSequenceWhenOneElementInputSequence(){
+    public void searchShouldReturnIsInSequenceWhenOneElementInputSequence() {
         key = 1;
-        seq = new int[]{1};
+        seq = new int[] {1};
         searchResult = binarySearch.search(key, seq);
         assertTrue(searchResult.isFound());
+    }
+
+    @Test
+    public void searchShouldReturnIsNotInSequenceWhenOneElementInputSequence() {
+        key = 1;
+        seq = new int[] {2};
+        searchResult = binarySearch.search(key, seq);
+        assertFalse(searchResult.isFound());
     }
 }
