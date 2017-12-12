@@ -48,6 +48,14 @@ public class SearchTest {
         key = 3;
         seq = new int[] {1, 2, 3};
         searchResult = BinarySearch.search(key, seq);
-        assertEquals(seq[seq.length-1], searchResult.getPosition());
+        assertEquals(seq[seq.length - 1], searchResult.getPosition());
+    }
+
+    @Test
+    public void searchShouldReturnIsMiddleInSequenceWhenMultiElementInputSequence() {
+        key = 2;
+        seq = new int[] {1, 2, 3};
+        searchResult = BinarySearch.search(key, seq);
+        assertEquals(seq[seq.length / 2], searchResult.getPosition());
     }
 }
