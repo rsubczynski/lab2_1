@@ -42,4 +42,12 @@ public class SearchTest {
         searchResult = BinarySearch.search(key, seq);
         assertEquals(seq[0], searchResult.getPosition());
     }
+
+    @Test
+    public void searchShouldReturnIsLastInSequenceWhenMultiElementInputSequence() {
+        key = 3;
+        seq = new int[] {1, 2, 3};
+        searchResult = BinarySearch.search(key, seq);
+        assertEquals(seq[seq.length-1], searchResult.getPosition());
+    }
 }
