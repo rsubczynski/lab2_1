@@ -58,4 +58,12 @@ public class SearchTest {
         searchResult = BinarySearch.search(key, seq);
         assertEquals(seq[seq.length / 2], searchResult.getPosition());
     }
+
+    @Test
+    public void searchShouldReturnIsNotInSequenceWhenMultiElementInputSequence() {
+        key = 4;
+        seq = new int[] {1, 2, 3};
+        searchResult = BinarySearch.search(key, seq);
+        assertFalse(searchResult.isFound());
+    }
 }
