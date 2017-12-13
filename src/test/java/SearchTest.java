@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 import edu.iis.mto.bsearch.BinarySearch;
@@ -24,7 +25,7 @@ public class SearchTest {
         key = 1;
         seq = new int[] {1};
         searchResult = BinarySearch.search(key, seq);
-        assertTrue(searchResult.isFound());
+        assertThat(searchResult.isFound(), Matchers.is(true));
     }
 
     @Test
@@ -32,7 +33,7 @@ public class SearchTest {
         key = 1;
         seq = new int[] {2};
         searchResult = BinarySearch.search(key, seq);
-        assertFalse(searchResult.isFound());
+        assertThat(searchResult.isFound(), Matchers.is(false));
     }
 
     @Test
@@ -40,7 +41,7 @@ public class SearchTest {
         key = 1;
         seq = new int[] {1, 2, 3};
         searchResult = BinarySearch.search(key, seq);
-        assertEquals(0, searchResult.getPosition());
+        assertThat(searchResult.getPosition(), Matchers.is(0));
     }
 
     @Test
@@ -48,7 +49,7 @@ public class SearchTest {
         key = 3;
         seq = new int[] {1, 2, 3};
         searchResult = BinarySearch.search(key, seq);
-        assertEquals(seq.length - 1, searchResult.getPosition());
+        assertThat(searchResult.getPosition(), Matchers.is(seq.length - 1));
     }
 
     @Test
@@ -56,7 +57,7 @@ public class SearchTest {
         key = 2;
         seq = new int[] {1, 2, 3};
         searchResult = BinarySearch.search(key, seq);
-        assertEquals(seq.length / 2, searchResult.getPosition());
+        assertThat(searchResult.getPosition(), Matchers.is(seq.length / 2));
     }
 
     @Test
@@ -64,6 +65,6 @@ public class SearchTest {
         key = 4;
         seq = new int[] {1, 2, 3};
         searchResult = BinarySearch.search(key, seq);
-        assertFalse(searchResult.isFound());
+        assertThat(searchResult.getPosition(), Matchers.is(-1));
     }
 }
