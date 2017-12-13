@@ -37,32 +37,40 @@ public class SearchTest {
 
     @Test
     public void searchShouldReturnIsFirstInSequenceWhenMultiElementInputSequence() {
-        key = 1;
-        seq = new int[] {1, 2, 3};
+        key = 10;
+        seq = new int[] {10, 12, 23, 43};
         searchResult = BinarySearch.search(key, seq);
         assertThat(searchResult.getPosition(), Matchers.is(0));
     }
 
     @Test
     public void searchShouldReturnIsLastInSequenceWhenMultiElementInputSequence() {
-        key = 3;
-        seq = new int[] {1, 2, 3};
+        key = 30;
+        seq = new int[] {7, 15, 23, 27, 30};
         searchResult = BinarySearch.search(key, seq);
         assertThat(searchResult.getPosition(), Matchers.is(seq.length - 1));
     }
 
     @Test
-    public void searchShouldReturnIsMiddleInSequenceWhenMultiElementInputSequence() {
-        key = 2;
-        seq = new int[] {1, 2, 3};
+    public void searchShouldReturnIsMiddleInOddSequenceWhenMultiElementInputSequence() {
+        key = 13;
+        seq = new int[] {5, 11, 13, 34, 89};
         searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is(seq.length / 2));
+        assertThat(searchResult.getPosition(), Matchers.is((seq.length-1)/2));
+    }
+
+    @Test
+    public void searchShouldReturnIsMiddleInEvenSequenceWhenMultiElementInputSequence() {
+        key = 7;
+        seq = new int[] {1, 2, 3, 7, 9, 11, 13, 40};
+        searchResult = BinarySearch.search(key, seq);
+        assertThat(searchResult.getPosition(), Matchers.is((seq.length-1)/2));
     }
 
     @Test
     public void searchShouldReturnIsNotInSequenceWhenMultiElementInputSequence() {
         key = 4;
-        seq = new int[] {1, 2, 3};
+        seq = new int[] {1, 2, 3, 5, 14};
         searchResult = BinarySearch.search(key, seq);
         assertThat(searchResult.getPosition(), Matchers.is(-1));
     }
