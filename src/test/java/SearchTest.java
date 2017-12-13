@@ -68,6 +68,22 @@ public class SearchTest {
     }
 
     @Test
+    public void searchShouldReturnIsBeforeMiddleInSequenceWhenMultiElementInputSequence() {
+        key = 10;
+        seq = new int[] {3, 7, 10, 17, 19, 21, 33, 40, 98};
+        searchResult = BinarySearch.search(key, seq);
+        assertThat(searchResult.getPosition(), Matchers.is(2));
+    }
+
+    @Test
+    public void searchShouldReturnIsAfterMiddleInSequenceWhenMultiElementInputSequence() {
+        key = 40;
+        seq = new int[] {3, 7, 10, 17, 19, 21, 33, 40, 98};
+        searchResult = BinarySearch.search(key, seq);
+        assertThat(searchResult.getPosition(), Matchers.is(7));
+    }
+
+    @Test
     public void searchShouldReturnIsNotInSequenceWhenMultiElementInputSequence() {
         key = 4;
         seq = new int[] {1, 2, 3, 5, 14};
