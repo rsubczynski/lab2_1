@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -12,12 +12,11 @@ public class SearchTest {
     private int key;
     private int[] seq;
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void searchShouldReturnExceptionWhenZeroElementInputSequence() {
         key = 1;
         seq = new int[] {};
         searchResult = BinarySearch.search(key, seq);
-        assertNotNull(IllegalArgumentException.class);
     }
 
     @Test
