@@ -56,7 +56,7 @@ public class SearchTest {
         key = 13;
         seq = new int[] {5, 11, 13, 34, 89};
         searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is((seq.length-1)/2));
+        assertThat(searchResult.getPosition(), Matchers.is((seq.length - 1) / 2));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class SearchTest {
         key = 7;
         seq = new int[] {1, 2, 3, 7, 9, 11, 13, 40};
         searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is((seq.length-1)/2));
+        assertThat(searchResult.getPosition(), Matchers.is((seq.length - 1) / 2));
     }
 
     @Test
@@ -74,4 +74,13 @@ public class SearchTest {
         searchResult = BinarySearch.search(key, seq);
         assertThat(searchResult.getPosition(), Matchers.is(-1));
     }
+
+    @Test
+    public void searchShouldReturnFailureCodeWhenUnorderedInputSequence() {
+        key = 2;
+        seq = new int[] {4, 10, 2, 3, 5, 14, 1};
+        searchResult = BinarySearch.search(key, seq);
+        assertThat(searchResult.getPosition(), Matchers.is(-1));
+    }
+
 }
