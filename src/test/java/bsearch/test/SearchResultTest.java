@@ -80,4 +80,19 @@ public class SearchResultTest {
         assertThat(actualResult, is(true));
     }
 
+    @org.junit.Test
+    public void noElementsInSequenceThrowIllegalArgumentException() {
+        final int key = 1;
+        final int[] sequence = {};
+        boolean expectedOutput = true;
+        boolean actualOutput = false;
+
+        try {
+            SearchResult result = BinarySearch.search(key, sequence);
+        } catch (IllegalArgumentException exception) {
+            actualOutput = true;
+        }
+
+        assertThat(actualOutput, is(expectedOutput));
+    }
 }
