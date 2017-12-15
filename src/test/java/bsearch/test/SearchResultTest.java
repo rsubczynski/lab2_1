@@ -17,4 +17,14 @@ public class SearchResultTest {
         assertTrue(result.isFound() == true && result.getPosition() == keyPositionInSequence);
     }
 
+    @org.junit.Test
+    public void isNotInSequenceWithASizeEqualToOne() {
+        final int key = 1;
+        final int[] sequence = {2};
+        final int keyPositionInSequence = -1; // KEY not found
+
+        SearchResult result = BinarySearch.search(key, sequence);
+        assertTrue(result.isFound() == false && result.getPosition() == keyPositionInSequence);
+    }
+
 }
