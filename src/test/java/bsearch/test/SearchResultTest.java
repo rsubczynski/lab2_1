@@ -58,4 +58,13 @@ public class SearchResultTest {
         assertTrue(result.isFound() == true && result.getPosition() == keyPositionInSequence);
     }
 
+    @org.junit.Test
+    public void noKeyInSequence() {
+        final int key = 11; // random Element which is not in sequence
+        final int[] sequence = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+        SearchResult result = BinarySearch.search(key, sequence);
+        assertTrue(result.isFound() == false && result.getPosition() == KEY_NOT_FOUND);
+    }
+
 }
