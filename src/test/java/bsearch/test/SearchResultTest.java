@@ -1,5 +1,7 @@
 package bsearch.test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import edu.iis.mto.bsearch.BinarySearch;
@@ -16,7 +18,10 @@ public class SearchResultTest {
         final int keyPositionInSequence = 1;
 
         SearchResult result = BinarySearch.search(key, sequence);
-        assertTrue(result.isFound() == true && result.getPosition() == keyPositionInSequence);
+
+        boolean actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
+        assertThat(actualResult, is(true));
+
     }
 
     @org.junit.Test
@@ -25,7 +30,9 @@ public class SearchResultTest {
         final int[] sequence = {2};
 
         SearchResult result = BinarySearch.search(key, sequence);
-        assertTrue(result.isFound() == false && result.getPosition() == KEY_NOT_FOUND);
+
+        boolean actualResult = result.isFound() == false && result.getPosition() == KEY_NOT_FOUND;
+        assertThat(actualResult, is(true));
     }
 
     @org.junit.Test
@@ -35,7 +42,9 @@ public class SearchResultTest {
         final int keyPositionInSequence = 1;
 
         SearchResult result = BinarySearch.search(key, sequence);
-        assertTrue(result.isFound() == true && result.getPosition() == keyPositionInSequence);
+
+        boolean actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
+        assertThat(actualResult, is(true));
     }
 
     @org.junit.Test
@@ -55,7 +64,9 @@ public class SearchResultTest {
         final int keyPositionInSequence = 6;
 
         SearchResult result = BinarySearch.search(key, sequence);
-        assertTrue(result.isFound() == true && result.getPosition() == keyPositionInSequence);
+
+        boolean actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
+        assertThat(actualResult, is(true));
     }
 
     @org.junit.Test
@@ -64,7 +75,9 @@ public class SearchResultTest {
         final int[] sequence = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
         SearchResult result = BinarySearch.search(key, sequence);
-        assertTrue(result.isFound() == false && result.getPosition() == KEY_NOT_FOUND);
+
+        boolean actualResult = result.isFound() == false && result.getPosition() == KEY_NOT_FOUND;
+        assertThat(actualResult, is(true));
     }
 
 }
