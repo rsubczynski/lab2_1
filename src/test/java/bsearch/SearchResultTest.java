@@ -60,7 +60,7 @@ public class SearchResultTest {
     public void isInMiddleOfSequence() {
         final int key = 3;
         final int[] seq = {1, 2, 3, 4, 5};
-        final int positionInSequence = 3;
+        final int positionInSequence = ((0 + seq.length - 1) / 2) + 1;
         final boolean expectResult = true;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
