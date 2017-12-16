@@ -1,11 +1,10 @@
-import static edu.iis.mto.bsearch.BinarySearch.search;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-
+import edu.iis.mto.bsearch.SearchResult;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.iis.mto.bsearch.SearchResult;
+import static edu.iis.mto.bsearch.BinarySearch.search;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 
 public class SearchTest {
 

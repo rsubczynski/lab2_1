@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package edu.iis.mto.bsearch;
 
@@ -12,14 +12,14 @@ public class SearchResult {
         return position > NOT_FOUND;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     void setPosition(int position) {
         if (position > NOT_FOUND) {
             this.position = position;
         }
-    }
-
-    public int getPosition() {
-        return position;
     }
 
     @Override
