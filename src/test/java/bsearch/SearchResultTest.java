@@ -78,4 +78,21 @@ public class SearchResultTest {
         assertThat(searchResult.isFound() == false && searchResult.getPosition() == positionInSequence,
                 is(expectResult));
     }
+
+    @Test
+    public void sequenceIsEmpty() {
+        final int key = 6;
+        final int[] seq = {};
+        final boolean expectResult = true;
+
+        boolean exceptionThrowed = false;
+
+        try {
+            SearchResult searchResult = BinarySearch.search(key, seq);
+        } catch (IllegalArgumentException e) {
+            exceptionThrowed = true;
+        }
+
+        assertThat(exceptionThrowed, is(expectResult));
+    }
 }
