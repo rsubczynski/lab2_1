@@ -1,9 +1,8 @@
 package edu.iis.mto.bsearch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThat;
 
+import org.hamcrest.Matchers;
 import org.junit.Test;
 
 public class BinarySearchTest {
@@ -12,52 +11,48 @@ public class BinarySearchTest {
 	public void ElementIsInTheSequenceAndSequenceLengthIsOne() {
 		int element = 1;
 		int[] seq = { 1 };
-		assertTrue(BinarySearch.search(element, seq).isFound());
+		assertThat(BinarySearch.search(element, seq).isFound(), Matchers.is(true));
 	}
 
 	@Test
 	public void ElementIsNotInTheSequenceAndSequenceLengthIsOne() {
 		int element = 2;
 		int[] seq = { 1 };
-		assertFalse(BinarySearch.search(element, seq).isFound());
+		assertThat(BinarySearch.search(element, seq).isFound(), Matchers.is(false));
 	}
 
 	@Test
 	public void ElementIsFirstInTheSequenceAndSequenceLengthIsMoreThanOne() {
 		int element = 3;
 		int[] seq = { 3, 4, 5, 6 };
-		assertEquals(BinarySearch.search(element, seq).getPosition(), 1);
+		assertThat(BinarySearch.search(element, seq).getPosition(), Matchers.is(1));
 	}
 
 	@Test
 	public void ElementIsLastInTheSequenceAndSequenceLengthIsMoreThanOne() {
 		int element = 6;
 		int[] seq = { 3, 4, 5, 6 };
-		assertEquals(BinarySearch.search(element, seq).getPosition(), seq.length);
+		assertThat(BinarySearch.search(element, seq).getPosition(), Matchers.is(seq.length));
 	}
 
 	@Test
 	public void ElementIsInTheMiddleOfTheSequenceAndSequenceLengthIsMoreThanOne() {
 		int element = 4;
 		int[] seq = { 3, 4, 5 };
-		assertEquals(BinarySearch.search(element, seq).getPosition(), seq.length / 2 + 1);
+		assertThat(BinarySearch.search(element, seq).getPosition(), Matchers.is(seq.length / 2 + 1));
 	}
 
 	@Test
 	public void ElementIsNotInTheSequenceAndSequenceLengthIsMoreThanOne() {
 		int element = 6;
 		int[] seq = { 1, 2, 3, 4, 5 };
-		assertFalse(BinarySearch.search(element, seq).isFound());
+		assertThat(BinarySearch.search(element, seq).isFound(), Matchers.is(false));
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void SequenceLengthEqualsZero() {
-		try {
-			int[] seq = {};
-			int key = 1;
-			BinarySearch.search(key, seq);
-		} catch (Exception e) {
-			assertEquals(e.getClass(), IllegalArgumentException.class);
-		}
+		int[] seq = {};
+		int key = 1;
+		BinarySearch.search(key, seq);
 	}
 }
