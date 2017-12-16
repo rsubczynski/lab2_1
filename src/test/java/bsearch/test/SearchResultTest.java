@@ -71,7 +71,7 @@ public class SearchResultTest {
     public void keyIsInTheMiddleOfSequence() {
         final int key = 6;
         final int[] sequence = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
-        final int keyPositionInSequence = 6;
+        final int keyPositionInSequence = (0 + sequence.length - 1) / 2 + 1;
         boolean actualResult = false;
         boolean expectedResult = true;
 
