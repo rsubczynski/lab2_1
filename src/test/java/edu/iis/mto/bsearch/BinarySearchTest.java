@@ -28,4 +28,11 @@ public class BinarySearchTest {
 		int[] seq = { 3, 4, 5, 6 };
 		assertEquals(BinarySearch.search(element, seq).getPosition(), 1);
 	}
+
+	@Test
+	public void ElementIsLastInTheSequenceAndSequenceLengthIsMoreThanOne() {
+		int element = 6;
+		int[] seq = { 3, 4, 5, 6 };
+		assertEquals(BinarySearch.search(element, seq).getPosition(), seq.length);
+	}
 }
