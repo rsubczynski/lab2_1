@@ -34,10 +34,11 @@ public class BinarySearch {
                 result.setPosition(center + 1);
                 break;
             } else {
-                if (seq[center] < key)
+                if (seq[center] < key) {
                     start = center + 1;
-                else
+                } else {
                     end = center - 1;
+                }
             }
 
         }

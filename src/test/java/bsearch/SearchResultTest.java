@@ -79,20 +79,12 @@ public class SearchResultTest {
                 is(expectResult));
     }
 
-    @Test
-    public void sequenceIsEmpty() {
+    @Test(expected = IllegalArgumentException.class)
+    public void sequenceIsEmpty() throws IllegalArgumentException {
         final int key = 6;
         final int[] seq = {};
-        final boolean expectResult = true;
 
-        boolean exceptionThrowed = false;
+        SearchResult searchResult = BinarySearch.search(key, seq);
 
-        try {
-            SearchResult searchResult = BinarySearch.search(key, seq);
-        } catch (IllegalArgumentException e) {
-            exceptionThrowed = true;
-        }
-
-        assertThat(exceptionThrowed, is(expectResult));
     }
 }
