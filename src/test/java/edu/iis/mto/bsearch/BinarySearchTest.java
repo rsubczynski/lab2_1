@@ -35,4 +35,11 @@ public class BinarySearchTest {
 		int[] seq = { 3, 4, 5, 6 };
 		assertEquals(BinarySearch.search(element, seq).getPosition(), seq.length);
 	}
+
+	@Test
+	public void ElementIsInTheMiddleOfTheSequenceAndSequenceLengthIsMoreThanOne() {
+		int element = 4;
+		int[] seq = { 3, 4, 5 };
+		assertEquals(BinarySearch.search(element, seq).getPosition(), seq.length / 2 + 1);
+	}
 }
