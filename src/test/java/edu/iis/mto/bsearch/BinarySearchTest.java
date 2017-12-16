@@ -55,4 +55,11 @@ public class BinarySearchTest {
 		int key = 1;
 		BinarySearch.search(key, seq);
 	}
+
+	@Test
+	public void ElementIsInTheSecondPartOfTheSequence() {
+		int element = 4;
+		int[] seq = { 1, 2, 3, 4, 5, 6 };
+		assertThat(BinarySearch.search(element, seq).getPosition(), Matchers.greaterThanOrEqualTo(seq.length / 2 + 1));
+	}
 }
