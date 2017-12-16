@@ -1,102 +1,167 @@
+import static edu.iis.mto.bsearch.BinarySearch.search;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.hamcrest.Matchers;
+import org.junit.Before;
 import org.junit.Test;
 
-import edu.iis.mto.bsearch.BinarySearch;
 import edu.iis.mto.bsearch.SearchResult;
 
 public class SearchTest {
 
     private SearchResult searchResult;
     private int key;
-    private int[] seq;
+    private int[] sequenceZero;
+    private int[] sequenceOne;
+    private int[] sequenceEven;
+    private int[] sequenceOdd;
+    private int[] sequenceUnordered;
+
+    @Before
+    public void setUp() {
+        sequenceZero = new int[] {};
+        sequenceOne = new int[] {5};
+        sequenceEven = new int[] {1, 2, 3, 7, 9, 11, 13, 40};
+        sequenceOdd = new int[] {5, 11, 13, 34, 89};
+        sequenceUnordered = new int[] {4, 10, 2, 3, 5, 14, 1};
+    }
 
     @Test(expected = IllegalArgumentException.class)
-    public void searchShouldReturnExceptionWhenZeroElementInputSequence() {
+    public void searchReturnExceptionWhenZeroElementSequence() {
+        key = 5;
+        searchResult = search(key, sequenceZero);
+    }
+
+    @Test
+    public void searchReturnIsFoundInSequenceWhenOneElementSequence() {
+        key = 5;
+        searchResult = search(key, sequenceOne);
+        assertThat(searchResult.isFound(), is(true));
+    }
+
+    @Test
+    public void searchReturnPositionInSequenceWhenOneElementSequence() {
+        key = 5;
+        searchResult = search(key, sequenceOne);
+        assertThat(searchResult.getPosition(), is(0));
+    }
+
+    @Test
+    public void searchReturnIsNotFoundInSequenceWhenOneElementSequence() {
         key = 1;
-        seq = new int[] {};
-        searchResult = BinarySearch.search(key, seq);
+        searchResult = search(key, sequenceOne);
+        assertThat(searchResult.isFound(), is(false));
     }
 
     @Test
-    public void searchShouldReturnIsInSequenceWhenOneElementInputSequence() {
+    public void searchReturnFailureCodeWhenOneElementSequence() {
         key = 1;
-        seq = new int[] {1};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.isFound(), Matchers.is(true));
+        searchResult = search(key, sequenceOne);
+        assertThat(searchResult.getPosition(), is(-1));
     }
 
     @Test
-    public void searchShouldReturnIsNotInSequenceWhenOneElementInputSequence() {
-        key = 1;
-        seq = new int[] {2};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.isFound(), Matchers.is(false));
+    public void searchReturnIsFoundFirstInSequenceWhenMultiElementSequence() {
+        key = 5;
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.isFound(), is(true));
     }
 
     @Test
-    public void searchShouldReturnIsFirstInSequenceWhenMultiElementInputSequence() {
-        key = 10;
-        seq = new int[] {10, 12, 23, 43};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is(0));
+    public void searchReturnFirstPositionInSequenceWhenMultiElementSequence() {
+        key = 5;
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.getPosition(), is(0));
     }
 
     @Test
-    public void searchShouldReturnIsLastInSequenceWhenMultiElementInputSequence() {
-        key = 30;
-        seq = new int[] {7, 15, 23, 27, 30};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is(seq.length - 1));
+    public void searchReturnIsFoundLastInSequenceWhenMultiElementSequence() {
+        key = 89;
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.isFound(), is(true));
     }
 
     @Test
-    public void searchShouldReturnIsMiddleInOddSequenceWhenMultiElementInputSequence() {
+    public void searchReturnLastPositionInSequenceWhenMultiElementSequence() {
+        key = 89;
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.getPosition(), is(sequenceOdd.length - 1));
+    }
+
+    @Test
+    public void searchReturnIsFoundMiddleInOddSequenceWhenMultiElementSequence() {
         key = 13;
-        seq = new int[] {5, 11, 13, 34, 89};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is((seq.length - 1) / 2));
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.isFound(), is(true));
     }
 
     @Test
-    public void searchShouldReturnIsMiddleInEvenSequenceWhenMultiElementInputSequence() {
+    public void searchReturnMiddlePositionInOddSequenceWhenMultiElementSequence() {
+        key = 13;
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.getPosition(), is((sequenceOdd.length - 1) / 2));
+    }
+
+    @Test
+    public void searchReturnIsFoundMiddleInEvenSequenceWhenMultiElementSequence() {
         key = 7;
-        seq = new int[] {1, 2, 3, 7, 9, 11, 13, 40};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is((seq.length - 1) / 2));
+        searchResult = search(key, sequenceEven);
+        assertThat(searchResult.isFound(), is(true));
     }
 
     @Test
-    public void searchShouldReturnIsBeforeMiddleInSequenceWhenMultiElementInputSequence() {
-        key = 10;
-        seq = new int[] {3, 7, 10, 17, 19, 21, 33, 40, 98};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is(2));
+    public void searchReturnMiddlePositionInEvenSequenceWhenMultiElementSequence() {
+        key = 7;
+        searchResult = search(key, sequenceEven);
+        assertThat(searchResult.getPosition(), is((sequenceEven.length - 1) / 2));
     }
 
     @Test
-    public void searchShouldReturnIsAfterMiddleInSequenceWhenMultiElementInputSequence() {
-        key = 40;
-        seq = new int[] {3, 7, 10, 17, 19, 21, 33, 40, 98};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is(7));
-    }
-
-    @Test
-    public void searchShouldReturnIsNotInSequenceWhenMultiElementInputSequence() {
-        key = 4;
-        seq = new int[] {1, 2, 3, 5, 14};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is(-1));
-    }
-
-    @Test
-    public void searchShouldReturnFailureCodeWhenUnorderedInputSequence() {
+    public void searchReturnIsFoundBeforeMiddleInSequenceWhenMultiElementSequence() {
         key = 2;
-        seq = new int[] {4, 10, 2, 3, 5, 14, 1};
-        searchResult = BinarySearch.search(key, seq);
-        assertThat(searchResult.getPosition(), Matchers.is(-1));
+        searchResult = search(key, sequenceEven);
+        assertThat(searchResult.isFound(), is(true));
     }
 
+    @Test
+    public void searchReturnBeforeMiddlePositionInSequenceWhenMultiElementSequence() {
+        key = 2;
+        searchResult = search(key, sequenceEven);
+        assertThat(searchResult.getPosition(), is(1));
+    }
+
+    @Test
+    public void searchReturnIsFoundAfterMiddleInSequenceWhenMultiElementSequence() {
+        key = 13;
+        searchResult = search(key, sequenceEven);
+        assertThat(searchResult.isFound(), is(true));
+    }
+
+    @Test
+    public void searchReturnAfterMiddlePositionInSequenceWhenMultiElementSequence() {
+        key = 13;
+        searchResult = search(key, sequenceEven);
+        assertThat(searchResult.getPosition(), is(6));
+    }
+
+    @Test
+    public void searchReturnIsNotInSequenceWhenMultiElementSequence() {
+        key = 4;
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.isFound(), is(false));
+    }
+
+    @Test
+    public void searchReturnFailureCodeWhenMultiElementSequence() {
+        key = 4;
+        searchResult = search(key, sequenceOdd);
+        assertThat(searchResult.getPosition(), is(-1));
+    }
+
+    @Test
+    public void searchReturnFailureCodeWhenUnorderedSequence() {
+        key = 2;
+        searchResult = search(key, sequenceUnordered);
+        assertThat(searchResult.getPosition(), is(-1));
+    }
 }
