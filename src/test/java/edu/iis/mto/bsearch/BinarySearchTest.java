@@ -49,4 +49,15 @@ public class BinarySearchTest {
 		int[] seq = { 1, 2, 3, 4, 5 };
 		assertFalse(BinarySearch.search(element, seq).isFound());
 	}
+
+	@Test
+	public void SequenceLengthEqualsZero() {
+		try {
+			int[] seq = {};
+			int key = 1;
+			BinarySearch.search(key, seq);
+		} catch (Exception e) {
+			assertEquals(e.getClass(), IllegalArgumentException.class);
+		}
+	}
 }
