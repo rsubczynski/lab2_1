@@ -4,30 +4,34 @@ import edu.iis.mto.bsearch.BinarySearch;
 import edu.iis.mto.bsearch.SearchResult;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class SearchResultTest {
+
+    private final int NOT_FOUND = -1;
 
     @Test
     public void isInSequenceOfSizeOne() {
         final int key = 3;
         final int[] seq = {3};
         final int positionInSequence = 1;
+        final boolean expectResult = true;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
-        assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
+        assertThat(searchResult.isFound() && searchResult.getPosition() == positionInSequence, is(expectResult));
     }
 
     @Test
     public void isNotInSequenceOfSizeOne() {
         final int key = 2;
         final int[] seq = {3};
-        final int positionInSequence = -1;
+        final int positionInSequence = NOT_FOUND;
+        final boolean expectResult = true;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
-        assertFalse(searchResult.isFound());
-        assertTrue(searchResult.getPosition() == positionInSequence);
+        assertThat(searchResult.isFound() == false && searchResult.getPosition() == positionInSequence,
+                is(expectResult));
     }
 
     @Test
@@ -35,9 +39,10 @@ public class SearchResultTest {
         final int key = 1;
         final int[] seq = {1, 2, 3, 4, 5};
         final int positionInSequence = 1;
+        final boolean expectResult = true;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
-        assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
+        assertThat(searchResult.isFound() && searchResult.getPosition() == positionInSequence, is(expectResult));
     }
 
     @Test
@@ -45,9 +50,10 @@ public class SearchResultTest {
         final int key = 5;
         final int[] seq = {1, 2, 3, 4, 5};
         final int positionInSequence = 5;
+        final boolean expectResult = true;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
-        assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
+        assertThat(searchResult.isFound() && searchResult.getPosition() == positionInSequence, is(expectResult));
     }
 
     @Test
@@ -55,19 +61,21 @@ public class SearchResultTest {
         final int key = 3;
         final int[] seq = {1, 2, 3, 4, 5};
         final int positionInSequence = 3;
+        final boolean expectResult = true;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
-        assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
+        assertThat(searchResult.isFound() && searchResult.getPosition() == positionInSequence, is(expectResult));
     }
 
     @Test
     public void isNotInSequence() {
         final int key = 6;
         final int[] seq = {1, 2, 3, 4, 5};
-        final int positionInSequence = -1;
+        final int positionInSequence = NOT_FOUND;
+        final boolean expectResult = true;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
-        assertFalse(searchResult.isFound());
-        assertTrue(searchResult.getPosition() == positionInSequence);
+        assertThat(searchResult.isFound() == false && searchResult.getPosition() == positionInSequence,
+                is(expectResult));
     }
 }
