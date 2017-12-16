@@ -2,7 +2,8 @@ package bsearch.test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+
+import org.hamcrest.Matchers;
 
 import edu.iis.mto.bsearch.BinarySearch;
 import edu.iis.mto.bsearch.SearchResult;
@@ -16,23 +17,26 @@ public class SearchResultTest {
         final int key = 2;
         final int[] sequence = {2};
         final int keyPositionInSequence = 1;
+        boolean actualResult = false;
+        boolean expectedResult = true;
 
         SearchResult result = BinarySearch.search(key, sequence);
+        actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
 
-        boolean actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
-        assertThat(actualResult, is(true));
-
+        assertThat(actualResult, Matchers.equalTo(expectedResult));
     }
 
     @org.junit.Test
     public void keyIsNotInSequenceWithASizeEqualToOne() {
         final int key = 1;
         final int[] sequence = {2};
+        boolean actualResult = false;
+        boolean expectedResult = true;
 
         SearchResult result = BinarySearch.search(key, sequence);
+        actualResult = result.isFound() == false && result.getPosition() == KEY_NOT_FOUND;
 
-        boolean actualResult = result.isFound() == false && result.getPosition() == KEY_NOT_FOUND;
-        assertThat(actualResult, is(true));
+        assertThat(actualResult, Matchers.equalTo(expectedResult));
     }
 
     @org.junit.Test
@@ -40,11 +44,13 @@ public class SearchResultTest {
         final int key = 1;
         final int[] sequence = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         final int keyPositionInSequence = 1;
+        boolean actualResult = false;
+        boolean expectedResult = true;
 
         SearchResult result = BinarySearch.search(key, sequence);
+        actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
 
-        boolean actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
-        assertThat(actualResult, is(true));
+        assertThat(actualResult, Matchers.equalTo(expectedResult));
     }
 
     @org.junit.Test
@@ -52,9 +58,13 @@ public class SearchResultTest {
         final int key = 10;
         final int[] sequence = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         final int keyPositionInSequence = 10;
+        boolean actualResult = false;
+        boolean expectedResult = true;
 
         SearchResult result = BinarySearch.search(key, sequence);
-        assertTrue(result.isFound() == true && result.getPosition() == keyPositionInSequence);
+        actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
+
+        assertThat(actualResult, Matchers.equalTo(expectedResult));
     }
 
     @org.junit.Test
@@ -62,37 +72,41 @@ public class SearchResultTest {
         final int key = 6;
         final int[] sequence = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
         final int keyPositionInSequence = 6;
+        boolean actualResult = false;
+        boolean expectedResult = true;
 
         SearchResult result = BinarySearch.search(key, sequence);
+        actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
 
-        boolean actualResult = result.isFound() == true && result.getPosition() == keyPositionInSequence;
-        assertThat(actualResult, is(true));
+        assertThat(actualResult, Matchers.equalTo(expectedResult));
     }
 
     @org.junit.Test
     public void noKeyInSequence() {
         final int key = 11; // random Element which is not in sequence
         final int[] sequence = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        boolean actualResult = false;
+        boolean expectedResult = true;
 
         SearchResult result = BinarySearch.search(key, sequence);
+        actualResult = result.isFound() == false && result.getPosition() == KEY_NOT_FOUND;
 
-        boolean actualResult = result.isFound() == false && result.getPosition() == KEY_NOT_FOUND;
-        assertThat(actualResult, is(true));
+        assertThat(actualResult, Matchers.equalTo(expectedResult));
     }
 
     @org.junit.Test
-    public void noElementsInSequenceThrowIllegalArgumentException() {
+    public void noElementsInSequenceThrowIllegalArgumentException() throws IllegalArgumentException {
         final int key = 1;
         final int[] sequence = {};
-        boolean expectedOutput = true;
-        boolean actualOutput = false;
+        boolean expectedResult = true;
+        boolean actualResult = false;
 
         try {
-            SearchResult result = BinarySearch.search(key, sequence);
+            BinarySearch.search(key, sequence);
         } catch (IllegalArgumentException exception) {
-            actualOutput = true;
+            actualResult = true;
         }
 
-        assertThat(actualOutput, is(expectedOutput));
+        assertThat(actualResult, is(expectedResult));
     }
 }
