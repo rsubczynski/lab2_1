@@ -50,4 +50,13 @@ public class SearchResultTest {
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
 
+    @Test
+    public void isInMiddleOfSequence() {
+        final int key = 3;
+        final int[] seq = {1, 2, 3, 4, 5};
+        final int positionInSequence = 3;
+
+        SearchResult searchResult = BinarySearch.search(key, seq);
+        assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
+    }
 }
