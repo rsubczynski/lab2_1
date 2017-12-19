@@ -48,7 +48,7 @@ public class SearchResultTest {
     }
 
     @Test
-    public void elementIsFirsElementInMoreThanOneElementSequence(){
+    public void elementIsFirsElementInMoreThanOneElementSequence() {
         int element = 121;
         int[] sequence = {121, 122, 123, 124, 125, 127};
         int firstPositionInSequence = 1;
@@ -58,7 +58,7 @@ public class SearchResultTest {
     }
 
     @Test
-    public void elementIsLastElementInMoreThanOneElementSequence(){
+    public void elementIsLastElementInMoreThanOneElementSequence() {
         int element = 121;
         int[] sequence = {117, 118, 119, 120, 121};
         int lastPositionInSequence = sequence.length;
@@ -67,8 +67,34 @@ public class SearchResultTest {
         assertTrue(searchResult.getPosition() == lastPositionInSequence);
     }
 
+    @Test
+    public void elementIsCenterElementOfMoreThanOneElementSequence() {
+        int element = 121;
+        int[] sequence = {117, 118, 119, 120, 121, 122, 123, 124, 125};
+        int centerPositionInSequence = 5;
 
+        SearchResult searchResult = BinarySearch.search(element, sequence);
+        assertTrue(searchResult.getPosition() == centerPositionInSequence);
+    }
 
+    @Test
+    public void checkByIsFoundThatElementNotExistsInMoreThanOneElementSequence() {
+        int element = 10;
+        int[] sequence = {11, 12, 23, 14, 15, 16};
+
+        SearchResult searchResult = BinarySearch.search(element, sequence);
+        assertFalse(searchResult.isFound());
+    }
+
+    @Test
+    public void checkByGetPositionThatElementNotExistsInMoreThanOneElementSequence() {
+        int element = 10;
+        int[] sequence = {11, 12, 23, 14, 15, 16};
+        int positionWhenElementNotExist = -1;
+
+        SearchResult searchResult = BinarySearch.search(element, sequence);
+        assertTrue(searchResult.getPosition() == positionWhenElementNotExist);
+    }
 
 
 }
