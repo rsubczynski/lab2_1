@@ -107,14 +107,14 @@ public class SearchResultTest {
     }
 
     @Test
-    public void t() {
+    public void checkThatEmptySequenceThrowEmptySequenceException() {
         int element = 0;
         int[] sequence = {};
         boolean trueIfEmptySequenceExeption = false;
 
         try {
             SearchResult searchResult = BinarySearch.search(element, sequence);
-        } catch (EmptySequenceExeption emptySequenceExeption) {
+        } catch (EmptySequenceException emptySequenceException) {
             trueIfEmptySequenceExeption = true;
         }
 
