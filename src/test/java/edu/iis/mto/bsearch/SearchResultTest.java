@@ -3,6 +3,7 @@ package edu.iis.mto.bsearch;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 /**
  * Created by Lukasz on 2017-12-19.
@@ -15,6 +16,7 @@ public class SearchResultTest {
         int[] sequence = {11};
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertTrue(searchResult.isFound());
     }
 
@@ -25,6 +27,7 @@ public class SearchResultTest {
         int positionWhenElementNotExist = -1;
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertTrue(searchResult.getPosition() > positionWhenElementNotExist);
     }
 
@@ -34,6 +37,7 @@ public class SearchResultTest {
         int[] sequence = {11};
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertFalse(searchResult.isFound());
     }
 
@@ -44,6 +48,7 @@ public class SearchResultTest {
         int positionWhenElementNotExist = -1;
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertTrue(searchResult.getPosition() == positionWhenElementNotExist);
     }
 
@@ -54,6 +59,7 @@ public class SearchResultTest {
         int firstPositionInSequence = 1;
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertTrue(searchResult.getPosition() == firstPositionInSequence);
     }
 
@@ -64,6 +70,7 @@ public class SearchResultTest {
         int lastPositionInSequence = sequence.length;
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertTrue(searchResult.getPosition() == lastPositionInSequence);
     }
 
@@ -74,6 +81,7 @@ public class SearchResultTest {
         int centerPositionInSequence = 5;
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertTrue(searchResult.getPosition() == centerPositionInSequence);
     }
 
@@ -83,6 +91,7 @@ public class SearchResultTest {
         int[] sequence = {11, 12, 23, 14, 15, 16};
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertFalse(searchResult.isFound());
     }
 
@@ -93,8 +102,23 @@ public class SearchResultTest {
         int positionWhenElementNotExist = -1;
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
+
         assertTrue(searchResult.getPosition() == positionWhenElementNotExist);
     }
 
+    @Test
+    public void t() {
+        int element = 0;
+        int[] sequence = {};
+        boolean trueIfEmptySequenceExeption = false;
+
+        try {
+            SearchResult searchResult = BinarySearch.search(element, sequence);
+        } catch (EmptySequenceExeption emptySequenceExeption) {
+            trueIfEmptySequenceExeption = true;
+        }
+
+        assertThat(trueIfEmptySequenceExeption, is(true));
+    }
 
 }
