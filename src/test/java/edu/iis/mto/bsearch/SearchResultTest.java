@@ -75,10 +75,20 @@ public class SearchResultTest {
     }
 
     @Test
-    public void elementIsCenterElementOfMoreThanOneElementSequence() {
+    public void elementIsCenterElementOfMoreThanOneElementSequenceEvenCase() {
+        int element = 120;
+        int[] sequence = {117, 118, 119, 120, 121, 122, 123, 124};
+        int centerPositionInSequence = (sequence.length - 1) / 2 + 1;
+
+        SearchResult searchResult = BinarySearch.search(element, sequence);
+
+        assertTrue(searchResult.getPosition() == centerPositionInSequence);
+    }
+    @Test
+    public void elementIsCenterElementOfMoreThanOneElementSequenceNotEvenCase() {
         int element = 121;
         int[] sequence = {117, 118, 119, 120, 121, 122, 123, 124, 125};
-        int centerPositionInSequence = 5;
+        int centerPositionInSequence = (sequence.length - 1) / 2 + 1;
 
         SearchResult searchResult = BinarySearch.search(element, sequence);
 
