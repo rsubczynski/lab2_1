@@ -1,17 +1,16 @@
-
 import edu.iis.mto.bsearch.BinarySearch;
 import edu.iis.mto.bsearch.SearchResult;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class SearchResultTest {
 
     private final int NOT_FOUND = -1;
 
-    @Test
-    public void keyShouldExistSequenceOfSizeOne() {
+    @Test public void keyShouldExistSequenceOfSizeOne() {
         final int key = 3;
         final int[] seq = {3};
         final int positionInSequence = 1;
@@ -20,8 +19,7 @@ public class SearchResultTest {
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
 
-    @Test
-    public void keyShouldntExistInSequenceOfSizeOne() {
+    @Test public void keyShouldntExistInSequenceOfSizeOne() {
         final int key = 2;
         final int[] seq = {3};
 
@@ -30,8 +28,7 @@ public class SearchResultTest {
         assertTrue(searchResult.getPosition() == NOT_FOUND);
     }
 
-    @Test
-    public void keyShouldExistAsFirstElementOfSequence() {
+    @Test public void keyShouldExistAsFirstElementOfSequence() {
         final int key = 1;
         final int[] seq = {1, 2, 3, 4, 5};
         final int positionInSequence = 1;
@@ -40,8 +37,7 @@ public class SearchResultTest {
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
 
-    @Test
-    public void keyShouldExistAsLastElementOfSequence() {
+    @Test public void keyShouldExistAsLastElementOfSequence() {
         final int key = 5;
         final int[] seq = {1, 2, 3, 4, 5};
         final int positionInSequence = 5;
@@ -50,18 +46,22 @@ public class SearchResultTest {
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
 
-    @Test
-    public void keyShouldExistAsMiddleElementOfSequence() {
+    @Test public void keyShouldExistAsMiddleElementOfSequence() {
         final int key = 3;
         final int[] seq = {1, 2, 3, 4, 5};
-        final int positionInSequence = calculateAvg(seq);
+        int positionInSequence = 0;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
+
+        if (seq.length % 2 != 0) {
+            positionInSequence = calculateAvg(seq);
+        }else{
+            fail("Sequence has an even number of characters");
+        }
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
 
-    @Test
-    public void keyShouldntExistInSequence() {
+    @Test public void keyShouldntExistInSequence() {
         final int key = 6;
         final int[] seq = {1, 2, 3, 4, 5};
 
@@ -70,8 +70,7 @@ public class SearchResultTest {
         assertTrue(searchResult.getPosition() == NOT_FOUND);
     }
 
-    @Test
-    public void testShouldThrowsIllegalArgumentExceptionWhenWeTryAddedEmptySequence() {
+    @Test public void testShouldThrowsIllegalArgumentExceptionWhenWeTryAddedEmptySequence() {
         final int key = 6;
         final int[] seq = {};
 
@@ -85,7 +84,6 @@ public class SearchResultTest {
 
         assertTrue(exceptionThrowed);
     }
-
 
     private int calculateAvg(int[] seq) {
         return ((seq.length - 1) / 2) + 1;
