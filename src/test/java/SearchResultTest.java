@@ -54,12 +54,11 @@ public class SearchResultTest {
     public void keyShouldExistAsMiddleElementOfSequence() {
         final int key = 3;
         final int[] seq = {1, 2, 3, 4, 5};
-        final int positionInSequence = 3;
+        final int positionInSequence = calculateAvg(seq);
 
         SearchResult searchResult = BinarySearch.search(key, seq);
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
-
 
     @Test
     public void keyShouldntExistInSequence() {
@@ -72,7 +71,7 @@ public class SearchResultTest {
     }
 
     @Test
-    public void sequenceIsEmpty() {
+    public void testShouldThrowsIllegalArgumentExceptionWhenWeTryAddedEmptySequence() {
         final int key = 6;
         final int[] seq = {};
 
@@ -85,5 +84,10 @@ public class SearchResultTest {
         }
 
         assertTrue(exceptionThrowed);
+    }
+
+
+    private int calculateAvg(int[] seq) {
+        return ((seq.length - 1) / 2) + 1;
     }
 }
