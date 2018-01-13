@@ -58,4 +58,16 @@ public class SearchResultTest {
         SearchResult searchResult = BinarySearch.search(key, seq);
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
+
+
+    @Test
+    public void keyShouldntExistInSequence() {
+        final int key = 6;
+        final int[] seq = {1, 2, 3, 4, 5};
+        final int positionInSequence = -1;
+
+        SearchResult searchResult = BinarySearch.search(key, seq);
+        assertFalse(searchResult.isFound());
+        assertTrue(searchResult.getPosition() == positionInSequence);
+    }
 }
