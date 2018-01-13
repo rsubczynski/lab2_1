@@ -39,6 +39,14 @@ public class SearchResultTest {
         assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
     }
 
+    @Test
+    public void keyShouldExistAsLastElementOfSequence() {
+        final int key = 5;
+        final int[] seq = {1, 2, 3, 4, 5};
+        final int positionInSequence = 5;
 
+        SearchResult searchResult = BinarySearch.search(key, seq);
+        assertTrue(searchResult.isFound() && searchResult.getPosition() == positionInSequence);
+    }
 
 }
