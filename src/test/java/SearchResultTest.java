@@ -8,6 +8,8 @@ import static org.junit.Assert.assertTrue;
 
 public class SearchResultTest {
 
+    private final int NOT_FOUND = -1;
+
     @Test
     public void keyShouldExistSequenceOfSizeOne() {
         final int key = 3;
@@ -22,11 +24,10 @@ public class SearchResultTest {
     public void keyShouldntExistInSequenceOfSizeOne() {
         final int key = 2;
         final int[] seq = {3};
-        final int positionInSequence = -1;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
         assertFalse(searchResult.isFound());
-        assertTrue(searchResult.getPosition() == positionInSequence);
+        assertTrue(searchResult.getPosition() == NOT_FOUND);
     }
 
     @Test
@@ -64,10 +65,9 @@ public class SearchResultTest {
     public void keyShouldntExistInSequence() {
         final int key = 6;
         final int[] seq = {1, 2, 3, 4, 5};
-        final int positionInSequence = -1;
 
         SearchResult searchResult = BinarySearch.search(key, seq);
         assertFalse(searchResult.isFound());
-        assertTrue(searchResult.getPosition() == positionInSequence);
+        assertTrue(searchResult.getPosition() == NOT_FOUND);
     }
 }
