@@ -70,4 +70,20 @@ public class SearchResultTest {
         assertFalse(searchResult.isFound());
         assertTrue(searchResult.getPosition() == NOT_FOUND);
     }
+
+    @Test
+    public void sequenceIsEmpty() {
+        final int key = 6;
+        final int[] seq = {};
+
+        boolean exceptionThrowed = false;
+
+        try {
+            SearchResult searchResult = BinarySearch.search(key, seq);
+        } catch (IllegalArgumentException e) {
+            exceptionThrowed = true;
+        }
+
+        assertTrue(exceptionThrowed);
+    }
 }
